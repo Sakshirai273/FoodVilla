@@ -1,5 +1,28 @@
 import React from "react";
-import  ReactDOM, {createRoot} from "react-dom/client";
+import  ReactDOM from "react-dom/client";
+
+//Default import 
+import Header from "./components/Header";
+import Body from "./components/Header";
+import Footer from "./components/Header";
+import { IMG_CDN_URL } from "./constants";
+
+const AppLayout = () =>{
+  return (
+      <>
+          <Header/>
+          <Body/>
+          <Footer/>
+          </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout/>);
+
+//named import
+// import { Title } from "./components/Header";
+
  /**
               Header 
                 -Logo(title)
@@ -33,144 +56,165 @@ import  ReactDOM, {createRoot} from "react-dom/client";
 //     </div>
 // );
 
-//functional components
-const Title = () => (
-    <a href ="/">
-    <img 
-       className = "logo"
-       alt ="logo"
-       src = "E:\WEB DEV\NAMASTE REACT\NR - code practice\FoodVilla\logo.png"
-    />
-    {
-    /*  <h1 id = " title" key = "h2">
-    Food Villa
-     </h1>    --> we can have only one parent element(root) in the JSX . React offers "React.Fragment" to solve this problem . we can even use <> </> empty tags instead of react fragment for shortcut*/
-    }
-    </a>
-);
+// //functional components
+// const Title = () => (
+//     <a href ="/">
+//     <img 
+//        className = "logo"
+//        alt ="logo"
+//        src = "E:\WEB DEV\NAMASTE REACT\NR - code practice\FoodVilla\logo.png"
+//     />
+//     {
+//     /*  <h1 id = " title" key = "h2">
+//     Food Villa
+//      </h1>    --> we can have only one parent element(root) in the JSX . React offers "React.Fragment" to solve this problem . we can even use <> </> empty tags instead of react fragment for shortcut*/
+//     }
+//     </a>
+// );
 
 //composing components 
 
 
 
-const Header = () => {
-    return(
-        <div className="header">
-           <Title/> 
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contacts</li>
-                    <li>Cart</li> 
-                    </ul>
-            </div>
-        </div>
-    );
-};
+// const Header = () => {
+//     return(
+//         <div className="header">
+//            <Title/> 
+//             <div className="nav-items">
+//                 <ul>
+//                     <li>Home</li>
+//                     <li>About</li>
+//                     <li>Contacts</li>
+//                     <li>Cart</li> 
+//                     </ul>
+//             </div>
+//         </div>
+//     );
+// };
 
 //config Driven UI
-const config = [
-{
-    type: "carousel",
-cards:[
-    {
-        offerName: "50% off"
-    },
-    {
-        offerName:"NO delivery charge"
-    }
-]
-},
+  // const RestaurantCard = ({
+  //   cloudinaryImageId,
+  //   name,
+  //   cuisines,
+  //   lastMileTravelString,
+  // }) => {
+  //   return (
+  //     <div className="card">
+  //       <img src={
+  //            "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp"
+  //           + cloudinaryImageId
+  //           } />
+  //       <h2>{name}</h2>
+  //       <h5>{cuisines.join(", ")}</h5>
+  //       <h6>{area}</h6>
+  //       <span>
+  //         <h4
+  //           style={
+  //             avgRating < 4 ? { backgroundColor: "red" } : { color: "white" }
+  //           }
+  //         >
+  //           <i className="fa-solid fa-star"></i>
+  //           {avgRating}
+  //         </h4>
+  //         <h4>{lastMileTravelString}</h4>
+  //         <h4>{costForTwoString}</h4>
+  //       </span>
+  //     </div>
+  //   );
+  // };
+  
+// const config = [
+// {
+//     type: "carousel",
+// cards:[
+//     {
+//         offerName: "50% off"
+//     },
+//     {
+//         offerName:"NO delivery charge"
+//     }
+// ]
+// },
 
-        type: "restaurants",
-    cards: [
-        {
-            name : "Burger King",
-            image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-            cuisines: ["Burger" , "Americano"],
-            rating: "4.2",
-            },
-            {
-                name : "KFC",
-                image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-                cuisines: ["Burger" , "Americano"],
-                rating: "4.2",
-                },
-    ]
-    },
-] 
-const restaurantList = [{
-    name : "Burger King",
-    image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-    cuisines: ["Burger" , "Americano"],
-    rating: "4.2",
-},
-{
-name : "Burger King",
-image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-cuisines: ["Burger" , "Americano"],
-rating: "4.2",
-},
-{
-name : "Burger King",
-image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-cuisines: ["Burger" , "Americano"],
-rating: "4.2",
-},
-{
-    name : "Burger King",
-    image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
-    cuisines: ["Burger" , "Americano"],
-    rating: "4.2",
-    }
-];
-const RestaurantCard = () =>{
-    return (
-        <div className="card">
-            <img src = {burgerKing.image} />
-            <h2> {burgerKing.name}</h2>
-            <h3> {burgerKing.cuisines.join(",")}</h3>
-            <h4> {burgerKing.rating} stars</h4>
-        </div>
-    );
-}
+//         type: "restaurants",
+//     cards: [
+//         {
+//             name : "Burger King",
+//             image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+//             cuisines: ["Burger" , "Americano"],
+//             rating: "4.2",
+//             },
+//             {
+//                 name : "KFC",
+//                 image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+//                 cuisines: ["Burger" , "Americano"],
+//                 rating: "4.2",
+//                 },
+//     ]
+//     },
+// ] 
+// const restaurantList = [{
+//     name : "Burger King",
+//     image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+//     cuisines: ["Burger" , "Americano"],
+//     rating: "4.2",
+// },
+// {
+// name : "Burger King",
+// image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+// cuisines: ["Burger" , "Americano"],
+// rating: "4.2",
+// },
+// {
+// name : "Burger King",
+// image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+// cuisines: ["Burger" , "Americano"],
+// rating: "4.2",
+// },
+// {
+//     name : "Burger King",
+//     image: "https://b.zmtcdn.com/data/pictures/chains/2/18549832/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg?output-format=webp",
+//     cuisines: ["Burger" , "Americano"],
+//     rating: "4.2",
+//     }
+// ];
+// const RestaurantCard = () =>{
+//     return (
+//         <div className="card">
+//             <img src = {burgerKing.image} />
+//             <h2> {burgerKing.name}</h2>
+//             <h3> {burgerKing.cuisines.join(",")}</h3>
+//             <h4> {burgerKing.rating} stars</h4>
+//         </div>
+//     );
+// }
 //  const Header =() =>{
 //     return (
 //     <h4>Header</h4>
 //     )
 //  }
- const Body =() =>{
-    return (
-    <div class = "restaurant-list">
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        </div>
-    );
- };
- const Footer =() =>{
-    return 
-    <h4>Footer</h4>;
-};
+//  const Body =() =>{
+//     return (
+//     <div className = "restaurant-list">
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         <RestaurantCard/>
+//         </div>
+//     );
+//  };
+//  const Footer =() =>{
+//     return 
+//     <h4>Footer</h4>;
+// };
 
-    const AppLayout = () =>{
-        return (
-            <React.Fragment>
-                <Header/>
-                <Body/>
-                <Footer/>
-                </React.Fragment>
-        );
-    }
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<AppLayout/>);
+ 
