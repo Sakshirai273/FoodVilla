@@ -12,3 +12,6 @@ const shimmer = () =>{
     };
 
 export default shimmer;
+
+//for every smalll thing , dont use npm packages . 
+// we can use "FORMIK" to make forms in react easily.
