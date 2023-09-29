@@ -22,11 +22,17 @@
     margin: 10px;
 }
 
-.card >img{
+.card > img{
 width:100%;
 }
 
 .restaurant-list{
     display: flex;
     flex-wrap : wrap;
+}
+.shimmer-card {
+    width:  200px;
+    height : 200px;
+    background : lightgrey;
+    margin: 20px;
 }
