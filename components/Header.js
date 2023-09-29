@@ -1,5 +1,10 @@
+import { useState } from "react";
 import logo from "./Images/logo.png";
 
+const LoggedInUser =() =>{
+    //API call to check if user is logged in
+    return false; //will return login button
+}
 const Title = () => (
     <a href ="/">
     <img 
@@ -11,6 +16,8 @@ const Title = () => (
 );
 
 const Header = () => {
+const [isLoggedIn , setIsLoggedIn] = useState(false);
+
     return(
         <div className="header">
            <Title/> 
@@ -22,6 +29,11 @@ const Header = () => {
                     <li>Cart</li> 
                     </ul>
             </div>
+            { isLoggedIn?(
+                 <button onClick={()=> setIsLoggedIn(false)}> LOGOUT </button> 
+            ) : (
+            <button onClick={() => setIsLoggedIn(true)}> LOGIN</button>
+        )}
         </div>
     );
 };
@@ -32,3 +44,13 @@ const Header = () => {
 
 // to export multiple things from same file , export using file name in curly braces - also called as named import.
 export default Header;
+
+//JS Expressions can be written in u=curly braces in react , but JS statement are not accepted. Property of JSX CURLY BRACES
+
+/*
+let a = 10;
+console.log(a); // these two are statements
+
+((a= 10), console.log(a)); // this is an expression
+*/
+//WE CAN DO ALMOSTT EVERYTHING OF JS IN CURLY BRACKETS , WE JUST HAVE TO WRITE IN THE EXPRESSION KIND OF WAY.
