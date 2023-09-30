@@ -1,64 +1,80 @@
-import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
-import {useState , useEffect} from "react";
-import shimmer from "./shimmer";
+import { useEffect, useState } from "react"; /* This is named export */
+import Shimmer from "./Shimmer"; /* This is default export */
+import { swiggy_api_URL } from "../constants";
 
-
+// Filter the restaurant data according input type
 function filterData(searchText, restaurants) {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.data?.name.toLowerCase().includes(searchText.toLowerCase())
+  const resFilterData = restaurants.filter((restaurant) =>
+    restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
   );
-  return filterData;
+  return resFilterData;
 }
 
- 
-
-  // Body Component for body section: It contain all restaurant cards
-  // We are mapping restaurantList array and passing JSON data to RestaurantCard component as props with unique key as index
-  // useState: To create a state variable, searchText is local state variable
-  // let searchTxt = "KFC"; //creating variable in JS
-
-  //searchTxt is a local state variable in react
-  //returns = [variable name , function to update the variable]
-  const Body = () => {
-    const [allRestaurants , setAllRestaurants] = useState([ ]);
+// Body Component for body section: It contain all restaurant cards
+const Body = () => {
+  // useState: To create a state variable, searchText, allRestaurants and filteredRestaurants is local state variable
   const [searchText, setSearchText] = useState("");
-  const [filteredRestaurants, setFilteredRestaurants] = useState(restaurantList);
-   
-      // useEffect(()=>{
-      //   console.log("call when dependency is changed")
-      // },[searchText]) 
-// pass a dependency array if we dont want to call it again . two paramaters are given , callback function and dependency array
-//useEffect is now dependent on searchText and the function is called when dependency is changed
-//it will be called once if dependency array is empty. --> once after render
-// if dependency array is searchText -> it wil be called once after initial render , and everytime after re render(when my searchtext changes)
-   
-useEffect(() => {
-  //API Call
-  getRestaurants();
-},[]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
-async function getRestaurants(){
-  const data = await fetch();
-  const json = await data.json();
-  console.log(json);
-  //OPERATIONAL LOADING
-  setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-  setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-}
+  // use useEffect for one time call getRestaurants using empty dependency array
+  useEffect(() => {
+    getRestaurants();
+  }, []);
 
-console.log("render");
+  // async function getRestaurant to fetch Swiggy API data
+  async function getRestaurants() {
+    // handle the error using try... catch
+    try {
+      const response = await fetch(swiggy_api_URL);
+      const json = await response.json();
 
-//not rendering component -> early return
-if(!allRestaurants ) return null;
+      // initialize checkJsonData() function to check Swiggy Restaurant data
+      async function checkJsonData(jsonData) {
+        for (let i = 0; i < jsonData?.data?.cards.length; i++) {
 
-if(filteredRestaurants?.length === 0) return <h1> NO restraunt match your filter!</h1>;
+          // initialize checkData for Swiggy Restaurant data
+          let checkData = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
+          // if checkData is not undefined then return it
+          if (checkData !== undefined) {
+            return checkData;
+          }
+        }
+      }
 
-//ternary operation to operate shimmer UI 
-  return (allRestaurants.length === 0)?  (
-    <shimmer/>
-  ) :(
+      // call the checkJsonData() function which return Swiggy Restaurant data
+      const resData = await checkJsonData(json);
+
+      // update the state variable restaurants with Swiggy API data
+      setAllRestaurants(resData);
+      setFilteredRestaurants(resData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // use searchData function and set condition if data is empty show error message
+  const searchData = (searchText, restaurants) => {
+    if (searchText !== "") {
+      const filteredData = filterData(searchText, restaurants);
+      setFilteredRestaurants(filteredData);
+      setErrorMessage("");
+      if (filteredData?.length === 0) {
+        setErrorMessage("No matches restaurant found");
+      }
+    } else {
+      setErrorMessage("");
+      setFilteredRestaurants(restaurants);
+    }
+  };
+
+  // if allRestaurants is empty don't render restaurants cards
+  if (!allRestaurants) return null;
+
+  return (
     <>
       <div className="search-container">
         <input
@@ -66,38 +82,36 @@ if(filteredRestaurants?.length === 0) return <h1> NO restraunt match your filter
           className="search-input"
           placeholder="Search a restaurant you want..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)} //e.target.value returns the value from list, a JS function on events.
+          // update the state variable searchText when we typing in input box
+          onChange={(e) => setSearchText(e.target.value)}
         ></input>
         <button
           className="search-btn"
           onClick={() => {
-            // filter the data
-            const data = filterData(searchText, allRestaurantsrestaurants);
-            // update the state of restaurants list
-            setFilteredRestaurants(data);
+            // user click on button searchData function is called
+            searchData(searchText, allRestaurants);
           }}
         >
           Search
         </button>
       </div>
-      <div className="restaurant-list">
-        {filteredRestaurants.map((restaurant) => {
-          return (
-            <RestaurantCard {...restaurant.data} key = {restaurant.data.id} />
-          );
-        })}
-      </div>
+      {errorMessage && <div className="error-container">{errorMessage}</div>}
+
+      {/* if restaurants data is not fetched then display Shimmer UI after the fetched data display restaurants cards */}
+      {allRestaurants?.length === 0 ? (
+        <Shimmer />
+      ) : (
+        <div className="restaurant-list">
+          {/* We are mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
+          {filteredRestaurants.map((restaurant) => {
+            return (
+              <RestaurantCard key={restaurant?.info?.id} {...restaurant?.info} />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
-    
+
 export default Body;
-
-//what is state/?
-//what is react hooks? -- kind of normal function</>
-//what is useState? -- used to create state varibale . it is imported as name import , written by fb developers.
-// every component in react maintains a state. So, we can put all the variables in that state. everytime we have to create a local variable we use state in react.
-
-//CONDITIONAL RENDERING
-//if restraunt is empty  => shimmer UI
-// if restraunt has data => actual data UI
