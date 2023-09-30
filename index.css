@@ -36,3 +36,7 @@ width:100%;
     background : lightgrey;
     margin: 20px;
 }
+
+.menu{
+    display: flex;
+}

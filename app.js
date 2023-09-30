@@ -5,20 +5,59 @@ import  ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import { IMG_CDN_URL } from "./constants";
+//import { IMG_CDN_URL } from "./constants";
+import { createBrowserRouter , RouterProvider, Outlet} from "react-router-dom";
+import About from "./components/About";
+import Error from "./Error";
+import Contact from "./components/Contact";
+import RestaurantMenu from "./components/RestaurantMenu";
+
 
 const AppLayout = () => {
   return (
     <React.Fragment>
       <Header />
-      <Body />
+      {/*OUTLET : -
+       <About/>
+      <Body /> */}
+      <Outlet/>
       <Footer />
     </React.Fragment>
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path : "/",
+    element: <AppLayout/>,
+    errorElement: <Error/>,
+  children: [
+    {
+      path: "/",
+      element:<Body/>,
+    },
+    {
+      path: "/about",
+      element:<About/>,
+    },
+    {
+      path: "/contact",
+      element:<Contact/>,
+    },
+    {
+      path: "/restaurant/:resId",
+      element:<RestaurantMenu/>,
+    },
+  ],
+  },
+]); 
+
+
+// if we want to have header and footer intact while we are even on about page  we will have to make it a children of applayout. All the children will go into the outlet according to the route.
+// it runs in a sequence so define applayout before using it in approuter function.
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+//root.render(<AppLayout />);
+root.render(<RouterProvider router =  {appRouter}/>) //like props
 
 //named import
 // import { Title } from "./components/Header";
