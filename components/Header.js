@@ -53,4 +53,7 @@ console.log(a); // these two are statements
 
 ((a= 10), console.log(a)); // this is an expression
 */
-//WE CAN DO ALMOSTT EVERYTHING OF JS IN CURLY BRACKETS , WE JUST HAVE TO WRITE IN THE EXPRESSION KIND OF WAY.
+//WE CAN DO ALMOST EVERYTHING OF JS IN CURLY BRACKETS , WE JUST HAVE TO WRITE IN THE EXPRESSION KIND OF WAY.
+
+
+//DN IS GREAT PLACE TO STORE IMAGES . IT IS VERY FAST . READ ABOUT IT. images are already optimised when put on CDN , can not do it once put. 

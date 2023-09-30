@@ -1,4 +1,4 @@
-const shimmer = () =>{
+const Shimmer = () =>{
     // return <h1> shimmer UI Loading.....</h1>;
     return(
         <div className="restaurant-list">
@@ -11,7 +11,7 @@ const shimmer = () =>{
         );
     };
 
-export default shimmer;
+export default Shimmer;
 
 //for every smalll thing , dont use npm packages . 
 // we can use "FORMIK" to make forms in react easily.
