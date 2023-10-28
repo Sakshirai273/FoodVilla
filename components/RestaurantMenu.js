@@ -45,7 +45,7 @@ const RestaurantMenu = () =>{
             {/* const Object = undefined;
             if(Object){ */}
           {Object.values(restaurant?.menu?.items || {}).map((item) => (
-            <li key={item.id}>   {item.name}</li>
+            <li key = {item.id} > {item.name}</li>
           ))}
           {/* } else{
              console.log('⛔️ Object is falsy');
@@ -58,3 +58,4 @@ const RestaurantMenu = () =>{
 };
 export default RestaurantMenu;
 
+//useparams can be used to read URLs

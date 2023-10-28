@@ -33,13 +33,21 @@ const appRouter = createBrowserRouter([
     errorElement: <Error/>,
   children: [
     {
+      path: "/about", // parentPath/{path} => localhost:1244/about
+      element:<About/>,
+      children: [
+        {
+          path: "profile", // parentPath/{path} => localhost:1244/about/profile --. if we will write /profile instead of profile.
+          element: <Profile />,
+        },
+      ],
+    }, 
+
+    {
       path: "/",
       element:<Body/>,
     },
-    {
-      path: "/about",
-      element:<About/>,
-    },
+   
     {
       path: "/contact",
       element:<Contact/>,
