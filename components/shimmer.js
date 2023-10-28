@@ -5,7 +5,7 @@ const Shimmer = () =>{
             {Array(10).fill("")
             .map((e,index)=> (
                 <div key = {index} className="shimmer-card"></div>
-     )) }
+     ))}
     
         </div>
         );
@@ -13,5 +13,5 @@ const Shimmer = () =>{
 
 export default Shimmer;
 
-//for every smalll thing , dont use npm packages . 
+//for every small thing , dont use npm packages . 
 // we can use "FORMIK" to make forms in react easily.

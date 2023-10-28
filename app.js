@@ -57,7 +57,7 @@ const appRouter = createBrowserRouter([
 // it runs in a sequence so define applayout before using it in approuter function.
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //root.render(<AppLayout />);
-root.render(<RouterProvider router =  {appRouter}/>) //like props
+root.render(<RouterProvider router =  {appRouter}/>) //like props // react router dom was developed by remix 
 
 //named import
 // import { Title } from "./components/Header";

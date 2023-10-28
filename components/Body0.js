@@ -1,8 +1,9 @@
+//EXACT CODE WRITTEN BY NAMASTE REACT 
 import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-
+import { Link } from "react-router-dom";
 function filterData(searchText, restaurants) {
   // 8 restraunt list = > filtered  rest with "King"
   const filterData = restaurants.filter((restaurant) =>
