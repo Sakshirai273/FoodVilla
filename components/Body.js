@@ -33,13 +33,13 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+   // console.log(json);
     // Optional Chaining
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
-  console.log("render");
+  //console.log("render");
 
   // not render component (Early return)
   if (!allRestaurants) return null;
@@ -77,7 +77,12 @@ const Body = () => {
         {/* You have to write logic for NO restraunt found here */}
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+            <Link
+            to={"/restaurant/" + restaurant.data.id}
+            key={restaurant.data.id}
+          >
+            <RestaurantCard {...restaurant.data} />
+            </Link>
           );
         })}
       </div>
