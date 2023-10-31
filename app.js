@@ -11,6 +11,7 @@ import About from "./components/About";
 import Error from "./Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Profile from "./components/Profile";
 
 
 const AppLayout = () => {
