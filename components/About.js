@@ -8,21 +8,23 @@ class About extends Component{
   constructor(props){
     super(props);
    
-    console.log("Parentconstructor");
+    //console.log("Parentconstructor");
   }
  componentDidMount(){
-
+  // Best place to make an Api call
+    //console.log("Parent - componentDidMount");
   
   }
  render(){
-  console.log("parent - render");
+ // console.log("parent - render");
   return (
     <div>
       <h1>ABOUT US PAGE</h1>
       <p> 
         This is namaste react course , finding path ch-7
         </p>
-        <Profile name = {"SakshiClass"} xyz = "abc"/>
+        {/* <Profile name = {"SakshiClass"} xyz = "abc"/> */}
+        <ProfileFunctionalComponent />
     </div>
   );
  }
