@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 const Profile = (props) => {
     const [count, SetCount] = useState(0);
-    const [count2, SetCount2] = useState(0);
+   // const [count2, SetCount2] = useState(0);
     useEffect(() => {
         //API Call
          //console.log("useEffect");
-    });
+    },[count]);
     //console.log("render");
     return(
         <div>
