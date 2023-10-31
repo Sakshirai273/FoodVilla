@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react"; 
 
 const Profile = (props) => {
-    const [count, SetCount] = useState(0);
+    const [count, setCount] = useState(0);
    // const [count2, SetCount2] = useState(0);
     useEffect(() => {
         //API Call
-         //console.log("useEffect");
-    },[count]);
+        const timer = setInterval(() => {
+            console.log("NAMASTE REACT OP ");
+          }, 1000);
+         console.log("useEffect");
     //console.log("render");
+    
+    return () => {
+    clearInterval(timer);
+        console.log("useEffect Return");
+    };
+    }, []);
+    console.log("render");
     return(
         <div>
             <h2> Profile component </h2>
@@ -15,7 +24,7 @@ const Profile = (props) => {
             <h3> Count : {count}</h3>
             <button
             onClick={() => {
-                SetCount(1);
+                setCount(1);
                // SetCount2(2);
             }}
             >
