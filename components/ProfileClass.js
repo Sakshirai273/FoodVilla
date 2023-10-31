@@ -19,7 +19,7 @@ class Profile extends React.Component {
         location :  "Dummy Location",
       },
     };
-     console.log("child Constructor"+ this.props.name);
+    // console.log("child Constructor"+ this.props.name);
 } 
 //class based components have life cycle methods.
 //CALLING SEQUENCE :- Constructor -> component renders  -> componentdidmount
@@ -49,6 +49,8 @@ componentWillUnmount(){
     clearInterval(this.timer);
    console.log(" component will unmount "); // 
 }
+
+
      render(){
         const {count} = this.state;
         console.log("child - render" + this.props.name);
@@ -59,7 +61,7 @@ componentWillUnmount(){
         <h2>XYZ: {this.props.xyz} </h2> */}
         <img src = {this.state.userInfo.avatar_url}/>
         <h2>Name: {this.state.userInfo.name} </h2>
-        <h2>Location: {this.state.location} </h2>
+        <h2>Location: {this.state.userInfo.location} </h2>
         {/* <h2> Count : {count}</h2> */}
         {/* <button
          onClick={() => {
