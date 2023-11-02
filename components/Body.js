@@ -54,11 +54,11 @@ const Body = () => {
   }
 
   //const offline = true;
-  const isOnline = useOnline();
+  // const isOnline = useOnline();
 
-  if(!isOnline) {
-    return <h1>🔴OFFLINE , PLS CHECK YOUR CONNECTION</h1>;
-  }
+  // if(!isOnline) {
+  //   return <h1>🔴OFFLINE , PLS CHECK YOUR CONNECTION</h1>;
+  // }
 
   // use searchData function and set condition if data is empty show error message
   const searchData = (searchText, restaurants) => {
