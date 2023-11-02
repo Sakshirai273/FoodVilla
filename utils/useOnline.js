@@ -1,17 +1,28 @@
 import {useEffect, useState} from 'react';
 const useOnline = () => {
-    const[isOnline , setisOnline] = useState(true);
+    const[isOnline , setIsOnline] = useState(true);
 
     useEffect(() =>{
-    window.addEventListener("online",() => {
-        setisOnline(true);
-    });
-    window.addEventListener("offline",() => {
-        setisOnline(false);
-    });
+        const handleOnline = () => {
+            setIsOnline(true);
+        };
+        const handleOffline = () =>{
+            setIsOnline(false);
+        };
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+
+    return() => {
+        window.removeEventListener("online",handleOnline);
+        window.removeEventListener("offline",handleOffline);
+    };
 } , []);
+
    return isOnline;
   //return status; //returns true or false
 };
 
 export default useOnline;
+// WE SHOULD ALWAYS REMOVE EVENT LISTENERS AFTER USING THEM.
+//This hook will be removed in the unmounting phase.
