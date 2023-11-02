@@ -36,6 +36,9 @@ const isOnline = useOnline();
                     <li>Contacts</li>
                     </Link>
                     <li>Cart</li> 
+                    <Link to = "/instamart">
+                    <li>Instamart</li>
+                    </Link>
                     </ul>
             </div>
             <h1> {isOnline? "🟢" : "🔴" } </h1>
