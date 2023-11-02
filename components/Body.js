@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer"; /* This is default export */
 import { swiggy_api_URL } from "../constants";
 import { Link } from "react-router-dom";
 import {filterData} from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 
 
@@ -52,9 +53,10 @@ const Body = () => {
     }
   }
 
-  const offline = true;
+  //const offline = true;
+  const isOnline = useOnline();
 
-  if(offline) {
+  if(!isOnline) {
     return <h1>🔴OFFLINE , PLS CHECK YOUR CONNECTION</h1>;
   }
 
