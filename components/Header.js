@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "./Images/logo.png";
 import { Link } from "react-router-dom"; // used exactly as we use anchor tag , it just does not loads the page 
+import useOnline from "../utils/useOnline";
 
 const LoggedInUser =() =>{
     //API call to check if user is logged in
@@ -19,6 +20,7 @@ const Title = () => (
 const Header = () => {
 const [isLoggedIn , setIsLoggedIn] = useState(false);
 
+const isOnline = useOnline();
     return(
         <div className="header">
            <Title/> 
@@ -36,6 +38,7 @@ const [isLoggedIn , setIsLoggedIn] = useState(false);
                     <li>Cart</li> 
                     </ul>
             </div>
+            <h1> {isOnline? "🟢" : "🔴" } </h1>
             { isLoggedIn?(
                  <button onClick={()=> setIsLoggedIn(false)}> LOGOUT </button> 
             ) : (
