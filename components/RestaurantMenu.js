@@ -75,12 +75,12 @@ import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); // call useParams and get value of restaurant id using object destructuring
-  const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
-  const [menuItems, setMenuItems] = useState([]);
-  useEffect(() => {
-    getRestaurantInfo(); // call getRestaurantInfo function so it fetch api data and set data in restaurant state variable
-  }, []);
-
+  // const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
+  // const [menuItems, setMenuItems] = useState([]);
+  // useEffect(() => {
+  //   getRestaurantInfo(); // call getRestaurantInfo function so it fetch api data and set data in restaurant state variable
+  // }, []);
+ const restaurant = useRestaurant(resId);
   
 
   return !restaurant ? (
