@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import  ReactDOM from "react-dom/client";
 
 //Default import 
@@ -12,7 +12,22 @@ import Error from "./Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
+import Instamart from "./components/Instamart";
+import Shimmer from "./components/Shimmer";
 
+// IT MAKES LARGE SCALE APPLICATIONS FASTER
+// Chunking- generally in the large scale applications , you build a different component/ chunk/ bundle based on the use cases. by default , it loads some initisl code , that should not be complete code but only particularly necessary code.
+//ALSO KNOWN as:-
+// Code splitting 
+// Dynamic Bundling
+// Lazy loading
+// Dynamic Import 
+//On demand loading
+// NOTE:- NEVER LAZY LOAD DYNAMIC COMPONENT INSIDE ANOTHER COMPONENT, BCUZ IT WILL BE LAZY LOADED AFTER EVERY RENDER
+
+const Instamart = lazy(() => import("./components/Instamart")); //lazy function takes callback function which returns import with a path of another component
+const About = lazy(() => import("./components/About"));
+//Upon on Demand Loading -> Upon render -> suspend loading
 
 const AppLayout = () => {
   return (
@@ -35,7 +50,11 @@ const appRouter = createBrowserRouter([
   children: [
     {
       path: "/about", // parentPath/{path} => localhost:1244/about
-      element:<About/>,
+      element:(
+      <Suspense fallback = {<h1>loading....</h1>}>
+        <About/>
+        </Suspense>
+      ),
       children: [
         {
           path: "profile", // parentPath/{path} => localhost:1244/about/profile --. if we will write /profile instead of profile.
@@ -56,12 +75,20 @@ const appRouter = createBrowserRouter([
     {
       path: "/restaurant/:resId",
       element:<RestaurantMenu/>,
+    }, 
+    {
+      path: "/instamart",
+      element:(
+      <Suspense fallback= { <Shimmer/>}> 
+        <Instamart/>
+        </Suspense>
+        ),
     },
   ],
   },
 ]); 
 
-
+//Fallback  shows anything if the instamart component isn't loaded.
 // if we want to have header and footer intact while we are even on about page  we will have to make it a children of applayout. All the children will go into the outlet according to the route.
 // it runs in a sequence so define applayout before using it in approuter function.
 const root = ReactDOM.createRoot(document.getElementById("root"));
